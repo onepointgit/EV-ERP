@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="fuap_pos_product_default_code.Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('product-name')]" position="inside">
+            <div class="text-muted" t-if="line.product_default_code.length !== 0">
+                [<t t-esc="line.product_default_code"/>]
+            </div>
+        </xpath>
+    </t>
+
+    <t t-name="fuap_pos_product_default_code.ProductCard" t-inherit="point_of_sale.ProductCard" t-inherit-mode="extension">
+        <xpath expr="//div[@class='product-information-tag']" position="after">
+            <div t-if="props.product.default_code"
+                class="position-absolute rounded-3 p-sm-1 m-sm-1 product-default-code-tag"
+                t-esc="props.product.default_code" />
+        </xpath>
+    </t>
+</templates>

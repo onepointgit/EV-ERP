@@ -1,0 +1,18 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fuap_pos_product_default_code
+# 
+# Translators:
+# Alejandro Molina, 2024
+# 
+
+#. module: fuap_pos_product_default_code
+#: model:ir.model.fields,field_description:fuap_pos_product_default_code.field_pos_config__print_product_default_code_receipt
+#: model:ir.model.fields,field_description:fuap_pos_product_default_code.field_res_config_settings__pos_print_product_default_code_receipt
+msgid "Product internal reference on receipt"
+msgstr "Interne Referenz des Produkts bei Erhalt"
+
+#. module: fuap_pos_product_default_code
+#: model_terms:ir.ui.view,arch_db:fuap_pos_product_default_code.res_config_settings_view_form
+msgid "Display the internal product reference on the point of sale receipt"
+msgstr "Anzeige der internen Produktreferenz auf dem Kassenbon"
