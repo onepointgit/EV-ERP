@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cancel_order_tree" model="ir.ui.view">
+        <field name="name">pos.order.cancel.reason.list</field>
+        <field name="model">pos.order.cancel.reason</field>
+        <field name="arch" type="xml">
+            <list string="Reasons" multi_edit="1">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="cancel_order_action" model="ir.actions.act_window">
+        <field name="name">Order Cancel Reason</field>
+        <field name="res_model">pos.order.cancel.reason</field>
+        <field name="view_id" ref="pos_cancel_order_reason.cancel_order_tree"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+           Create new reasons
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_order_cancel_reason"
+             parent="point_of_sale.menu_point_config_product"
+             action="cancel_order_action"
+             sequence="10"
+             groups="point_of_sale.group_pos_user"/>
+
+</odoo>
