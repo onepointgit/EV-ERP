@@ -1,0 +1,109 @@
+<odoo>
+    <data>
+
+        <record id="property_unit_view_tree" model="ir.ui.view">
+            <field name="name">property.unit.view.tree</field>
+            <field name="model">property.unit</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="property_id"/>
+                    <field name="pp_type"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="property_unit_view_form" model="ir.ui.view">
+            <field name="name">property.unit.view.form</field>
+            <field name="model">property.unit</field>
+            <field name="arch" type="xml">
+                <form string="Unit">
+                    <header>
+                        <field name="status" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <field name="image" widget="image"
+                               class="oe_avatar"
+                               options="{'preview_image': 'image'}"/>
+                        <div class="oe_title">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Property">
+                                <field name="property_id"/>
+                                <field name="pp_type" readonly="1"/>
+                                <field name="pp_sub_type_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="area"/>
+                                <field name="furnishing_status"/>
+                                <field name="unit_type" string="Unit Type"/>
+                                <field name="price" readonly="0"/>
+                                <field name="taxes_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <separator string="Number of People allowed"/>
+                                <group>
+                                    <group>
+                                        <field name="max_adults"/>
+                                    </group>
+                                    <group>
+                                        <field name="max_children"/>
+                                    </group>
+                                </group>
+
+                                <separator string="Description"/>
+                                <field name="description" colspan="4" nolabel="1"/>
+                                <separator string="Policy"/>
+                                <field name="policy" colspan="4" nolabel="1"/>
+                            </page>
+                            <page string="Amenities">
+                                <group>
+                                    <field name="services_ids" widget="many2many_tags"/>
+                                    <field name="facility_ids" widget="many2many_tags"/>
+                                    <field name="smoking_allowed"/>
+                                    <field name="parking_available"/>
+                                </group>
+                            </page>
+                            <page string="Settings" groups="base.group_no_one">
+                                <group>
+
+                                    <field name="product_id"/>
+                                    <field name="next_available_date"/>
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="property_unit_action" model="ir.actions.act_window">
+            <field name="name">Units</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.unit</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No unit found ! Let's create one
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="property_unit_menu"
+                  name="Units"
+                  action="property_unit_action"
+                  parent="property_menu"
+                  sequence="10"/>
+
+
+    </data>
+</odoo>

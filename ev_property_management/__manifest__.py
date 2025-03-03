@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Property Management',
+    'version': '18.0.1.1.1',
+    'summary': """""" ,
+    'description': """""",
+    'author': 'OdooSavvy',
+    'company': 'OdooSavvy',
+    'maintainer': 'OdooSavvy',
+    'depends': ['base', 'mail', 'accountant', 'point_of_sale'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/data.xml',
+        'views/property_views.xml',
+        'views/templates.xml',
+        'views/property_sub_type_views.xml',
+        'views/unit_views.xml',
+        'views/unit_type_views.xml',
+        'views/reservation_views.xml',
+        'views/folio_views.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [],
+    },
+    'images': [],
+    'license': 'LGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}

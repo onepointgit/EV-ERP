@@ -1,0 +1,158 @@
+<odoo>
+    <data>
+
+        <record id="unit_reservation_view_tree" model="ir.ui.view">
+            <field name="name">unit.reservation.view.tree</field>
+            <field name="model">unit.reservation</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="check_in_date"/>
+                    <field name="check_out_date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="unit_reservation_view_calendar" model="ir.ui.view">
+            <field name="name">unit.reservation.calendar</field>
+            <field name="model">unit.reservation</field>
+            <field name="arch" type="xml">
+                <calendar string="Reservation"
+                          date_start="check_in_date"
+                          date_stop="check_out_date"
+                          mode="month">
+                    <!-- Sidebar favorites filters -->
+                    <field name="partner_id" widget="many2one_avatar_user"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="unit_reservation_view_form" model="ir.ui.view">
+            <field name="name">unit.reservation.view.form</field>
+            <field name="model">unit.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Reservations">
+                    <header>
+                        <button name="button_confirm" type="object" invisible="state != 'draft'" string="Confirm"
+                                class="oe_highlight"
+                                data-hotkey="q"/>
+                        <button name="button_set_to_draft" type="object" invisible="state != 'cancel'"
+                                string="Set to Draft" class="btn-primary"
+                                data-hotkey="y"/>
+                        <button name="button_checked_in" type="object" invisible="state not in ('confirmed')"
+                                string="Check-in" class="btn-primary"
+                                data-hotkey="m"/>
+                        <button name="button_cancel" type="object"
+                                invisible="state in ('checked_in', 'checked_out', 'cancel')"
+                                string="Cancel" class="btn-secondary"
+                                data-hotkey="x"/>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,confirmed,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Customer Details">
+                                <field name="partner_id"/>
+                                <field name="partner_phone"/>
+                                <field name="partner_email"/>
+                                <field name="currency_id"/>
+                                <field name="price_list_id"/>
+                            </group>
+                            <group string="Booking Details">
+                                <field name="date"/>
+                                <field name="pp_sub_type_id" string="Property Type"/>
+                                <field name="check_in_date"/>
+                                <field name="check_out_date"/>
+                                <field name="no_of_adults"/>
+                                <field name="no_of_children"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Room Details">
+                                <field name="reservation_line_ids">
+                                    <list editable="bottom">
+                                        <field name="unit_type_id"/>
+                                        <field name="unit_id"/>
+                                        <field name="uom_qty"/>
+                                        <field name="currency_id" optional="hide"/>
+                                        <field name="price_unit" readonly="0"/>
+                                        <field name="tax_ids" readonly="0" widget="many2many_tags"/>
+                                        <field name="price_sub_total" optional="hide"/>
+                                        <field name="price_tax" optional="hide"/>
+                                        <field name="price_total"/>
+                                    </list>
+                                </field>
+                                <group colspan="2"
+                                       class="oe_subtotal_footer oe_right">
+                                    <field name="reservation_subtotal"
+                                           sum="Untaxed amount" widget="monetary"/>
+                                    <field name="reservation_tax_price" widget="monetary"/>
+                                    <label for="reservation_total"/>
+                                    <field name="reservation_total" nolabel="1"
+                                           sum="Total amount" widget="monetary"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </page>
+                            <page string="Guest Document">
+                                <field name="guest_line_ids">
+                                    <list>
+                                        <field name="unit_id"/>
+                                        <field name="document_id"/>
+                                        <field name="document_type_id"/>
+                                        <field name="valid_from"/>
+                                        <field name="valid_to"/>
+                                        <field name="guest_name"/>
+                                        <field name="gender"/>
+                                        <field name="date_of_birth"/>
+                                        <field name="country"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Others">
+                                <group>
+                                    <group>
+                                        <field name="source_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="unit_reservation_action" model="ir.actions.act_window">
+            <field name="name">Reservations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unit.reservation</field>
+            <field name="view_mode">list,form,calendar</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No Reservations found ! Let's create one
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="transaction_menu"
+                  name="Transactions"
+                  parent="ev_compound_menu"
+                  sequence="10"/>
+
+        <menuitem id="unit_reservation_menu"
+                  name="Reservations"
+                  action="unit_reservation_action"
+                  parent="transaction_menu"
+                  sequence="10"/>
+
+
+    </data>
+</odoo>

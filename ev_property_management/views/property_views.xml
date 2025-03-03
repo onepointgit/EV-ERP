@@ -1,0 +1,105 @@
+<odoo>
+    <data>
+
+        <record id="property_master_view_tree" model="ir.ui.view">
+            <field name="name">property.master.view.tree</field>
+            <field name="model">property.master</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="pp_type"/>
+                    <field name="pp_sub_type_id"/>
+                    <field name="area"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+        <!--    Hotel Room form view-->
+        <record id="property_master_view_form" model="ir.ui.view">
+            <field name="name">property.master.view.form</field>
+            <field name="model">property.master</field>
+            <field name="arch" type="xml">
+                <form string="Property">
+                    <header>
+                        <field name="status" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <field name="pp_image" widget="image"
+                               class="oe_avatar"
+                               options="{'preview_image': 'pp_image'}"/>
+                        <div class="oe_title">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Address">
+                                <field name="street"/>
+                                <field name="street2" string=""/>
+                                <field name="zip"/>
+                                <field name="city"/>
+                                <field name="state_id"/>
+                                <field name="country_id"/>
+                            </group>
+                            <group>
+                                <field name="pp_type"/>
+                                <field name="pp_sub_type_id"/>
+                                <field name="area"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descriptions">
+                                <field name="description" colspan="4" nolabel="1"/>
+                            </page>
+                            <page string="Units">
+                                <field name="unit_ids" nolabel="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="unit_type"/>
+                                        <field name="smoking_allowed"/>
+                                        <field name="parking_available"/>
+                                        <field name="furnishing_status"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="property_master_action" model="ir.actions.act_window">
+            <field name="name">Property</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.master</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No property found ! Let's create one
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="ev_compound_menu"
+                  name="Euro Village"
+                  web_icon="ev_property_management,static/description/icon.png"
+                  sequence="1"/>
+
+        <menuitem id="property_menu"
+                  name="Properties"
+                  parent="ev_compound_menu"
+                  sequence="1"/>
+
+        <menuitem id="property_master_menu"
+                  name="Property"
+                  action="property_master_action"
+                  parent="property_menu"
+                  sequence="1"/>
+
+
+    </data>
+</odoo>

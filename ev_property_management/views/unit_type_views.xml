@@ -1,0 +1,141 @@
+<odoo>
+    <data>
+
+        <record id="unit_type_view_form" model="ir.ui.view">
+            <field name="name">unit.type.view.form</field>
+            <field name="model">unit.type</field>
+            <field name="arch" type="xml">
+                <form string="Unit Type">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="pp_sub_type_id"/>
+                                <field name="area"/>
+                                <field name="price"/>
+                                <field name="taxes_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="product_id"/>
+                            </group>
+                        </group>
+                        <group string="Room Amenities">
+                            <field name="services_ids" widget="many2many_tags"/>
+                            <field name="facility_ids" widget="many2many_tags"/>
+                            <field name="smoking_allowed"/>
+                            <field name="parking_available"/>
+                        </group>
+                        <group string="Number of People allowed">
+                            <group>
+                                <field name="max_adults"/>
+                            </group>
+                            <group>
+                                <field name="max_children"/>
+                            </group>
+                        </group>
+                        <group string="Room Description">
+                            <field name="description" nolabel="1"/>
+                        </group>
+                        <group string="Room Policy">
+                            <field name="policy" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="unit_type_action" model="ir.actions.act_window">
+            <field name="name">Unit Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unit.type</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No unit type found ! Let's create one
+                </p>
+            </field>
+        </record>
+        <record id="unit_service_action" model="ir.actions.act_window">
+            <field name="name">Services</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unit.service</field>
+            <field name="view_mode">list</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No service found ! Let's create one
+                </p>
+            </field>
+        </record>
+        <record id="unit_facility_action" model="ir.actions.act_window">
+            <field name="name">Facilities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unit.facility</field>
+            <field name="view_mode">list</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No facility found ! Let's create one
+                </p>
+            </field>
+        </record>
+        <record id="document_type_action" model="ir.actions.act_window">
+            <field name="name">Document Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">document.type</field>
+            <field name="view_mode">list</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No Document Type found ! Let's create one
+                </p>
+            </field>
+        </record>
+        <record id="source_master_action" model="ir.actions.act_window">
+            <field name="name">Reservation Source</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">source.master</field>
+            <field name="view_mode">list</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    No Reservation Source found ! Let's create one
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="unit_type_menu"
+                  name="Unit Type"
+                  action="unit_type_action"
+                  parent="property_config_menu"
+                  sequence="10"/>
+
+        <menuitem id="unit_service_menu"
+                  name="Services"
+                  action="unit_service_action"
+                  parent="property_config_menu"
+                  sequence="10"/>
+
+        <menuitem id="unit_facility_menu"
+                  name="Facilities"
+                  action="unit_facility_action"
+                  parent="property_config_menu"
+                  sequence="10"/>
+
+        <menuitem id="document_type_menu"
+                  name="Document Type"
+                  action="document_type_action"
+                  parent="property_config_menu"
+                  sequence="12"/>
+
+        <menuitem id="source_master_menu"
+                  name="Reservation Source"
+                  action="source_master_action"
+                  parent="property_config_menu"
+                  sequence="12"/>
+
+
+    </data>
+</odoo>
